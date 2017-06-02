@@ -5,5 +5,7 @@ node_js:
   - 4
 matrix:
   fast_finish: true
+before_install: npm install --global npm
 script: npm run travis
-cache: npm
+cache:
+  npm: true
