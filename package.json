@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "repository": "SimenB/util.promisify-all",
-  "file": [
+  "files": [
     "index.js"
   ],
   "scripts": {
