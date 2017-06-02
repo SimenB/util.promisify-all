@@ -50,12 +50,14 @@ test('leave primitives alone', () => {
   const string = 'string';
   const nullVar = null;
   const undefinedVar = undefined;
-  const array = [number, boolean, string, nullVar, undefinedVar];
+  const symbol = Symbol('some symbol');
+  const array = [number, boolean, string, nullVar, undefinedVar, symbol];
 
   expect(m(number)).toBe(number);
   expect(m(boolean)).toBe(boolean);
   expect(m(string)).toBe(string);
   expect(m(nullVar)).toBe(nullVar);
   expect(m(undefinedVar)).toBe(undefinedVar);
+  expect(m(symbol)).toBe(symbol);
   expect(m(array)).toBe(array);
 });
