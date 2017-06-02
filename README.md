@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/SimenB/util.promisify-all.svg?branch=master)](https://travis-ci.org/SimenB/util.promisify-all)
 [![npm](https://img.shields.io/npm/v/util.promisify-all.svg)](https://www.npmjs.com/package/util.promisify-all)
+[![Greenkeeper badge](https://badges.greenkeeper.io/SimenB/util.promisify-all.svg)](https://greenkeeper.io/)
 
 'util.promisify' for objects. Uses [util.promisify](https://www.npmjs.com/package/util.promisify) under the hood.
 
