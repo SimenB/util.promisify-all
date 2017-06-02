@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "simenb-base",
+    "simenb-node",
+    "simenb-jest"
+  ]
+}
