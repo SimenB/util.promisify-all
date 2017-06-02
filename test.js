@@ -35,3 +35,11 @@ test('promisified object rejects', () => {
 test('successfully promisify fs', () => {
   expect(() => m(require('fs'))).not.toThrow();
 });
+
+test('successfully promisifies function with properties', () => {
+  const promisified = m(require('./fixtures/function-property'));
+  return Promise.all([
+    expect(promisified()).resolves.toEqual('foo'),
+    expect(promisified.bar()).resolves.toEqual('bar'),
+  ]);
+});

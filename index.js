@@ -3,11 +3,7 @@
 const promisify = require('util.promisify');
 const entries = require('object.entries');
 
-module.exports = obj => {
-  if (typeof obj === 'function') {
-    return promisify(obj);
-  }
-
+function promisifyOwnProperties(obj) {
   return entries(obj)
     .map(entry => {
       if (typeof entry[1] === 'function') {
@@ -17,4 +13,18 @@ module.exports = obj => {
       return { [entry[0]]: entry[1] };
     })
     .reduce((acc, curr) => Object.assign(acc, curr), {});
+}
+
+module.exports = obj => {
+  const promisifiedObject = promisifyOwnProperties(obj);
+
+  if (typeof obj === 'function') {
+    const promisifiedFunction = promisify(obj);
+
+    Object.assign(promisifiedFunction, promisifiedObject);
+
+    return promisifiedFunction;
+  }
+
+  return promisifiedObject;
 };
