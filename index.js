@@ -16,9 +16,19 @@ function promisifyOwnProperties(obj) {
 }
 
 module.exports = obj => {
+  if (!obj) {
+    return obj;
+  }
+
+  const typeOfObj = typeof obj;
+
+  if (typeOfObj !== 'function' && (typeOfObj !== 'object' || Array.isArray(obj))) {
+    return obj;
+  }
+
   const promisifiedObject = promisifyOwnProperties(obj);
 
-  if (typeof obj === 'function') {
+  if (typeOfObj === 'function') {
     const promisifiedFunction = promisify(obj);
 
     Object.assign(promisifiedFunction, promisifiedObject);

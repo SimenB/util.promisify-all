@@ -43,3 +43,15 @@ test('successfully promisifies function with properties', () => {
     expect(promisified.bar()).resolves.toEqual('bar'),
   ]);
 });
+
+test('leave primitives alone', () => {
+  const number = 1;
+  const boolean = true;
+  const string = 'string';
+  const array = [number, boolean, string];
+
+  expect(m(number)).toBe(number);
+  expect(m(boolean)).toBe(boolean);
+  expect(m(string)).toBe(string);
+  expect(m(array)).toBe(array);
+});
