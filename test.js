@@ -32,3 +32,7 @@ test('promisified object rejects', async () => {
   const promisified = m({ someFunc: func(true) });
   await expect(promisified.someFunc()).rejects.toBeDefined();
 });
+
+test('successfully promisify fs', () => {
+  expect(() => m(require('fs'))).not.toThrow();
+});

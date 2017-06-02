@@ -9,6 +9,12 @@ module.exports = obj => {
   }
 
   return entries(obj)
-    .map(entry => ({ [entry[0]]: promisify(entry[1]) }))
+    .map(entry => {
+      if (typeof entry[1] === 'function') {
+        return { [entry[0]]: promisify(entry[1]) };
+      }
+
+      return { [entry[0]]: entry[1] };
+    })
     .reduce((acc, curr) => Object.assign(acc, curr), {});
 };
