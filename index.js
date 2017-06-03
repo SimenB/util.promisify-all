@@ -3,6 +3,8 @@
 const promisify = require('util.promisify');
 const entries = require('object.entries');
 
+const combiner = (acc, curr) => Object.assign(acc, curr);
+
 function promisifyOwnProperties(obj) {
   return entries(obj)
     .map(entry => {
@@ -12,27 +14,7 @@ function promisifyOwnProperties(obj) {
 
       return { [entry[0]]: entry[1] };
     })
-    .reduce((acc, curr) => Object.assign(acc, curr), {});
-}
-
-function handleArray(arr) {
-  let numberOfPromisifictions = 0;
-
-  const promisifictions = arr.map(e => {
-    if (typeof e === 'function') {
-      numberOfPromisifictions++;
-
-      return promisify(e);
-    }
-
-    return e;
-  });
-
-  if (numberOfPromisifictions > 0) {
-    return promisifictions;
-  }
-
-  return arr;
+    .reduce(combiner, {});
 }
 
 module.exports = obj => {
@@ -45,7 +27,9 @@ module.exports = obj => {
   }
 
   if (Array.isArray(obj)) {
-    return handleArray(obj);
+    const props = promisifyOwnProperties(entries(obj).filter(e => obj.indexOf(e[1]) === -1).reduce(combiner, {}));
+
+    return Object.keys(props).length > 0 ? Object.assign(obj.slice(), props) : obj;
   }
 
   const promisifiedObject = promisifyOwnProperties(obj);

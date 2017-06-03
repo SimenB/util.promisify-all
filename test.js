@@ -60,17 +60,16 @@ test('leave primitives alone', () => {
   expect(m(symbol)).toBe(symbol);
 });
 
-test('promisify array entries', () => {
-  const array = [true, func()];
+test('promisify array properties', () => {
+  const array = [true, 'sup', func()];
+  array.bar = func();
 
   expect(m(array)).not.toBe(array);
-  expect(m(array)).toHaveLength(2);
-  expect(m(array)).toContain(true);
-  return expect(m(array)[1]()).resolves.toBeDefined();
+  return expect(m(array).bar()).resolves.toBeDefined();
 });
 
 test('return same array if no promisification', () => {
-  const array = [true, 'string'];
+  const array = [true, 'sup', func()];
 
   expect(m(array)).toBe(array);
 });
