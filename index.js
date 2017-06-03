@@ -15,13 +15,37 @@ function promisifyOwnProperties(obj) {
     .reduce((acc, curr) => Object.assign(acc, curr), {});
 }
 
+function handleArray(arr) {
+  let numberOfPromisifictions = 0;
+
+  const promisifictions = arr.map(e => {
+    if (typeof e === 'function') {
+      numberOfPromisifictions++;
+
+      return promisify(e);
+    }
+
+    return e;
+  });
+
+  if (numberOfPromisifictions > 0) {
+    return promisifictions;
+  }
+
+  return arr;
+}
+
 module.exports = obj => {
   if (!obj) {
     return obj;
   }
 
-  if (typeof obj !== 'function' && (typeof obj !== 'object')) {
+  if (typeof obj !== 'function' && typeof obj !== 'object') {
     return obj;
+  }
+
+  if (Array.isArray(obj)) {
+    return handleArray(obj);
   }
 
   const promisifiedObject = promisifyOwnProperties(obj);
