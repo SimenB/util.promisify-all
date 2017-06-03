@@ -63,6 +63,7 @@ test('leave primitives alone', () => {
 test('promisify array entries', () => {
   const array = [true, func()];
 
+  expect(m(array)).not.toBe(array);
   expect(m(array)).toHaveLength(2);
   expect(m(array)).toContain(true);
   return expect(m(array)[1]()).resolves.toBeDefined();
