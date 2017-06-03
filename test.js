@@ -51,7 +51,6 @@ test('leave primitives alone', () => {
   const nullVar = null;
   const undefinedVar = undefined;
   const symbol = Symbol('some symbol');
-  const array = [number, boolean, string, nullVar, undefinedVar, symbol];
 
   expect(m(number)).toBe(number);
   expect(m(boolean)).toBe(boolean);
@@ -59,5 +58,4 @@ test('leave primitives alone', () => {
   expect(m(nullVar)).toBe(nullVar);
   expect(m(undefinedVar)).toBe(undefinedVar);
   expect(m(symbol)).toBe(symbol);
-  expect(m(array)).toBe(array);
 });

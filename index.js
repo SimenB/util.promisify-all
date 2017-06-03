@@ -20,7 +20,7 @@ module.exports = obj => {
     return obj;
   }
 
-  if (typeof obj !== 'function' && (typeof obj !== 'object' || Array.isArray(obj))) {
+  if (typeof obj !== 'function' && (typeof obj !== 'object')) {
     return obj;
   }
 
