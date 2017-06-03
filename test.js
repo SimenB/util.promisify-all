@@ -33,7 +33,8 @@ test('promisified object rejects', () => {
 });
 
 test('successfully promisify fs', () => {
-  expect(() => m(require('fs'))).not.toThrow();
+  const fs = m(require('fs'));
+  expect(fs.stat(__dirname).then(stat => stat.isDirectory())).resolves.toEqual(true);
 });
 
 test('successfully promisifies function with properties', () => {
