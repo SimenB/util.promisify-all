@@ -29,7 +29,24 @@ module.exports = obj => {
   if (Array.isArray(obj)) {
     const props = promisifyOwnProperties(entries(obj).filter(e => obj.indexOf(e[1]) === -1).reduce(combiner, {}));
 
-    return Object.keys(props).length > 0 ? Object.assign(obj.slice(), props) : obj;
+    if (Object.keys(props).length === 0) {
+      return obj;
+    }
+
+    const newArray = obj.slice();
+    entries(props).forEach(e => {
+      const key = e[0];
+      const value = e[1];
+
+      Object.defineProperty(newArray, key, {
+        enumerable: true,
+        configurable: false,
+        writable: true,
+        value,
+      });
+    });
+
+    return newArray;
   }
 
   const promisifiedObject = promisifyOwnProperties(obj);
