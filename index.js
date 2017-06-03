@@ -20,15 +20,13 @@ module.exports = obj => {
     return obj;
   }
 
-  const typeOfObj = typeof obj;
-
-  if (typeOfObj !== 'function' && (typeOfObj !== 'object' || Array.isArray(obj))) {
+  if (typeof obj !== 'function' && (typeof obj !== 'object' || Array.isArray(obj))) {
     return obj;
   }
 
   const promisifiedObject = promisifyOwnProperties(obj);
 
-  if (typeOfObj === 'function') {
+  if (typeof obj === 'function') {
     const promisifiedFunction = promisify(obj);
 
     Object.assign(promisifiedFunction, promisifiedObject);
