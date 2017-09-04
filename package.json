@@ -28,7 +28,7 @@
     "eslint-config-simenb-base": "^14.0.0",
     "eslint-config-simenb-jest": "^2.0.1",
     "eslint-config-simenb-node": "^0.4.10",
-    "jest": "^20.0.4",
+    "jest": "^21.0.0",
     "prettier": "^1.5.3"
   },
   "jest": {
