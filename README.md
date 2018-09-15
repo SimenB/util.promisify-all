@@ -13,5 +13,7 @@ const promisify = require('util.promisify-all');
 
 const fs = promisify(require('fs'));
 
-fs.readFile('/tmp/file.txt').then(console.log).catch(console.error);
+fs.readFile('/tmp/file.txt')
+  .then(console.log)
+  .catch(console.error);
 ```

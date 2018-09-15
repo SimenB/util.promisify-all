@@ -24,12 +24,12 @@
     "util.promisify": "^1.0.0"
   },
   "devDependencies": {
-    "eslint": "^4.3.0",
-    "eslint-config-simenb-base": "^14.0.0",
+    "eslint": "^5.6.0",
+    "eslint-config-simenb-base": "^15.0.0",
     "eslint-config-simenb-jest": "^2.0.1",
-    "eslint-config-simenb-node": "^0.4.10",
-    "jest": "^22.1.4",
-    "prettier": "^1.5.3"
+    "eslint-config-simenb-node": "^1.0.0",
+    "jest": "^23.6.0",
+    "prettier": "^1.14.2"
   },
   "jest": {
     "testEnvironment": "node",
